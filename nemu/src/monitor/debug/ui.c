@@ -38,6 +38,17 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
+static int cmd_si(char *args)
+{int x=0;
+if(args == NULL)
+x=1;
+else sscanf(args,"%d",&x);
+cpu_exec(x);
+return 0;
+}
+
+
+
 static struct {
 	char *name;
 	char *description;
@@ -46,6 +57,8 @@ static struct {
 	{ "help", "Display informations about all supported commands", cmd_help },
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
+	{ "si","dan bu zhi xing",cmd_si},
+	
 
 	/* TODO: Add more commands */
 
