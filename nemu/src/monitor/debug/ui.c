@@ -47,6 +47,44 @@ cpu_exec(x);
 return 0;
 }
 
+static int cmd_info(char *args)
+{
+	if(args[0]=='r')
+	{
+	printf("eax,%x",cpu.eax);
+	printf("edx,%x",cpu.edx);
+	printf("ecx,%x",cpu.ecx);
+	printf("ebx,%x",cpu.ebx);
+	printf("ebp,%x",cpu.ebp);
+	printf("esi,%x",cpu.esi);
+	printf("edi,%x",cpu.edi);
+	printf("esp,%x",cpu.esp);
+	}
+	else
+	{
+	printf("order not yet in/n");
+	}
+	return 0;
+}
+	
+
+static int cmd_x(char *args)
+{
+	int age;
+	int n;
+	char *cmd = strtok(args," ");
+	sscanf (cmd,"%d",&n);
+	ages = cmd+strlen(cmd)+1;
+	sscanf (ages,"%x",&age);
+	swadder_t a;
+	for(int i=0;i<n;i++)
+	{
+	a=swadder_read(age+4*i,4);
+	printf("0x%x/n",a);
+	}
+	return 0;
+}
+
 
 
 static struct {
@@ -58,7 +96,8 @@ static struct {
 	{ "c", "Continue the execution of the program", cmd_c },
 	{ "q", "Exit NEMU", cmd_q },
 	{ "si","dan bu zhi xing",cmd_si},
-	
+	{ "info","print all registers",cmd_info},
+	{ "x","scanning memory",cmd_x},
 
 	/* TODO: Add more commands */
 
